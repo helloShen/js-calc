@@ -49,14 +49,16 @@ function calc(arrX, arrY, operator) {
  * 
  **********/
 
-const data = {
-    operands: [],   // maximum 2 operands
-    cursor: 0,      // pointer on operends, show next input position
-    cache: [],      // memorize second operand of last calculation
-    result: [],     // put the result of each calculation
-    show: [],
-    operator: '',   // store [+-*/] operator
-};
+function Data() {
+    this.operands = [['0']];   // maximum 2 operands
+    this.cursor = 0;          // pointer on operends, show next input position
+    this.cache = [];          // memorize second operand of last calculation
+    this.result = [];         // put the result of each calculation
+    this.show = this.operands[0];  // which data to show on the screen
+    this.operator = '';       // store [+-*/] operator
+}
+
+const data = new Data();
 
 /* true if at least 1 operand exists */
 function hasOperands() {
@@ -83,10 +85,28 @@ function current() {
     return data.operands[data.cursor];
 }
 
+/* Check if the operand already has dot.
+ * Each operand can have only 1 dot. */
+function hasDot(operand) {
+    return operand && operand.includes('.');
+}
+
+/* check if the operand contains nothing but a leading zero: ['0'] */
+function onlyLeadingZero(operand) {
+    return operand.length === 1 && operand[0] === '0';
+}
+
 /* user call this function to give input values */
-function input(str) {
-    if (!current()) data.operands.push([]);
-    current().push(str);
+function input(ch) {
+    if (!current()) data.operands.push(['0']);
+    if (ch === '.') {
+        if (!hasDot(current())) { // each operand can have only one dot
+            current().push(ch);
+        }
+    } else {
+        if (onlyLeadingZero(current())) current().splice(0, 1);
+        current().push(ch);
+    }
     data.show = current();
 } 
 
@@ -115,7 +135,7 @@ function operator(operator) {
         } else { // only has 1 operand
             data.cursor = 1;
         }
-    } else if (hasResult()) {
+    } else if (hasResult()) { // has no operand
         data.operands[0] = data.result;
         data.cache = [];
         data.cursor = 1;

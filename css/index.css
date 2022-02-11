@@ -51,13 +51,11 @@
     background-color: var(--very-light-gray);
 }
 
-.num,
-.dot {
+.num {
     background-color: var(--gray);
 }
 
-.num.pressed,
-.dot.pressed {
+.num.pressed {
     background-color: var(--light-gray);
 }
 

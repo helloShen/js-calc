@@ -66,6 +66,7 @@ function init() {
     numberController();
     operatorController();
     equalController();
+    show();
 }
 
 /* start everything */
