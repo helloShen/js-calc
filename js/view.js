@@ -1,4 +1,4 @@
-export const btns = {
+export const view = {
     /* original css class */
     'all': document.querySelectorAll('.btn'),
     'nums': document.querySelectorAll('.num'),
