@@ -33,30 +33,26 @@ function trim(str) {
     return arr.join('');
 }
 
-function calc(arrX, arrY, operator) {
-    const x = parseFloat(arrX.join(''));
-    const y = parseFloat(arrY.join(''));
-    const decimalX = arrX.length - 1 - arrX.indexOf('.');
-    const decimalY = arrY.length - 1 - arrY.indexOf('.');
-    const maxDecimal = Math.max(decimalX, decimalY);
-    const totalDecimal = decimalX + decimalY;
+/* input number can be either number or array, check their type before using them */
+function calc(inX, inY, operator) {
+    const x = (typeof inX === 'number')? inX : parseFloat(inX.join(''));
+    const y = (typeof inY === 'number')? inY : parseFloat(inY.join(''));
     let result = undefined;
     switch (operator) {
         case '+':
-            result = add(x, y).toFixed(maxDecimal);
+            result = add(x, y);
             break;
         case '-':
-            result = subtract(x, y).toFixed(maxDecimal);
+            result = subtract(x, y);
             break;
         case '*':
-            result = multiply(x, y).toFixed(totalDecimal);
+            result = multiply(x, y);
             break;
         case '/':
-            result = divide(x, y).toString();
+            result = divide(x, y);
             break;
     }
-    return Array.from(trim(result));
-    // return Array.from(result);
+    return result;
 }
 
 
@@ -66,13 +62,14 @@ function calc(arrX, arrY, operator) {
  * 
  **********/
 
+/* result must be cache as a floating point number, not array. Casting the floating point number to a string will lose information. */
 function Data() {
-    this.operands = [['0']];   // maximum 2 operands
-    this.cursor = 0;          // pointer on operends, show next input position
-    this.cache = [];          // memorize second operand of last calculation
-    this.result = [];         // put the result of each calculation
-    this.show = this.operands[0];  // which data to show on the screen
-    this.operator = '';       // store [+-*/] operator
+    this.operands = [['0']];        // maximum 2 operands
+    this.cursor = 0;                // pointer on operends, show next input position
+    this.cache = [];                // memorize second operand of last calculation
+    this.result = 0;                // result must be stored as a number, not array.
+    this.show = this.operands[0];   // which data to show on the screen, either current number, or the result
+    this.operator = '';             // store [+-*/] operator
 }
 
 const data = new Data();
@@ -90,11 +87,6 @@ function hasTwoOperands() {
 /* check whether the second operand of last operation is cached  */
 function hasCache() {
     return data.cache.length > 0;
-}
-
-/* check whether we have result from last operation stored */
-function hasResult() {
-    return data.result.length > 0;
 }
 
 /* return the target our cursor is currently pointing at */
@@ -127,9 +119,17 @@ function input(ch) {
     data.show = current();
 } 
 
-/* notice which data to show */
+/* 
+ * 0.1 + 0.2 = 0.30000000000000004
+ * 0.1 * 0.2 = 0.020000000000000004
+ * So format them before showing them to the user:
+ *  1. strip them to an approximation of 16 digitals(integer + decimal) 
+ *  2. trim the tailing 0
+ */
 function show() {
-    return data.show;
+    return (typeof data.show === 'number')? 
+        Array.from(trim(data.show.toPrecision(16)))
+        : data.show;
 }
 
 /* 
@@ -144,16 +144,15 @@ function show() {
 function operator(operator) {
     if (hasOperands()) {
         if (hasTwoOperands()) {
-            // data.result = Array.from(calc(data.operands.shift(), data.operands.shift(), data.operator).toString());
             data.result = calc(data.operands.shift(), data.operands.shift(), data.operator);
             data.cache = [];
             data.operands[0] = data.result;
             data.cursor = 1;
             data.show = data.result;
-        } else { // only has 1 operand
+        } else {    // only has 1 operand
             data.cursor = 1;
         }
-    } else if (hasResult()) { // has no operand
+    } else {        // has no operand
         data.operands[0] = data.result;
         data.cache = [];
         data.cursor = 1;
@@ -176,13 +175,11 @@ function operator(operator) {
 function equal() {
     if (hasTwoOperands()) {
         data.cache = data.operands[1];
-        // data.result = Array.from(calc(data.operands.shift(), data.operands.shift(), data.operator).toString());
         data.result = calc(data.operands.shift(), data.operands.shift(), data.operator);
-    } else if (hasOperands()) { // only 1 operands
+    } else if (hasOperands()) {     // only 1 operands
         data.result = data.operands.shift();
         data.cache = [];
-    } else if (hasCache()) { // no operands
-        // data.result = Array.from(calc(data.result, data.cache, data.operator).toString());
+    } else if (hasCache()) {        // no operands
         data.result = calc(data.result, data.cache, data.operator);
     }
     data.cursor = 0;

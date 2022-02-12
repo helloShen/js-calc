@@ -56,7 +56,7 @@ function equalController() {
 
 /* print the data on the screen */
 function show() {
-    view.screen.innerHTML = model.show().join('');
+    view.screen.innerHTML = (model.show())? model.show().join('') : 'Not a number';
 }
 
 /* a collection of all tasks */
@@ -71,6 +71,5 @@ function init() {
 
 /* start everything */
 init();
-
-
-
+console.log(0.1 + 0.2);
+console.log(0.1 * 0.2);
