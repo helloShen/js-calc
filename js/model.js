@@ -21,25 +21,42 @@ function divide(x, y) {
     return x / y;
 }
 
+/* trim redundant tailing zero: 1.2000 to 1.2, 1.000 to 1 */
+function trim(str) {
+    const arr = Array.from(str);
+    if (arr.includes('.')) {
+        let idx = arr.length;
+        while (idx - 1 > arr.indexOf('.') && arr[idx - 1] === '0') idx--;
+        arr.splice(idx, arr.length - idx);
+        if (arr.indexOf('.') === arr.length - 1) arr.splice(arr.length - 1, 1); 
+    }
+    return arr.join('');
+}
+
 function calc(arrX, arrY, operator) {
     const x = parseFloat(arrX.join(''));
     const y = parseFloat(arrY.join(''));
+    const decimalX = arrX.length - 1 - arrX.indexOf('.');
+    const decimalY = arrY.length - 1 - arrY.indexOf('.');
+    const maxDecimal = Math.max(decimalX, decimalY);
+    const totalDecimal = decimalX + decimalY;
     let result = undefined;
     switch (operator) {
         case '+':
-            result = add(x, y);
+            result = add(x, y).toFixed(maxDecimal);
             break;
         case '-':
-            result = subtract(x, y);
+            result = subtract(x, y).toFixed(maxDecimal);
             break;
         case '*':
-            result = multiply(x, y);
+            result = multiply(x, y).toFixed(totalDecimal);
             break;
         case '/':
-            result = divide(x, y);
+            result = divide(x, y).toString();
             break;
     }
-    return result;
+    return Array.from(trim(result));
+    // return Array.from(result);
 }
 
 
@@ -127,7 +144,8 @@ function show() {
 function operator(operator) {
     if (hasOperands()) {
         if (hasTwoOperands()) {
-            data.result = Array.from(calc(data.operands.shift(), data.operands.shift(), data.operator).toString());
+            // data.result = Array.from(calc(data.operands.shift(), data.operands.shift(), data.operator).toString());
+            data.result = calc(data.operands.shift(), data.operands.shift(), data.operator);
             data.cache = [];
             data.operands[0] = data.result;
             data.cursor = 1;
@@ -158,12 +176,14 @@ function operator(operator) {
 function equal() {
     if (hasTwoOperands()) {
         data.cache = data.operands[1];
-        data.result = Array.from(calc(data.operands.shift(), data.operands.shift(), data.operator).toString());
+        // data.result = Array.from(calc(data.operands.shift(), data.operands.shift(), data.operator).toString());
+        data.result = calc(data.operands.shift(), data.operands.shift(), data.operator);
     } else if (hasOperands()) { // only 1 operands
         data.result = data.operands.shift();
         data.cache = [];
     } else if (hasCache()) { // no operands
-        data.result = Array.from(calc(data.result, data.cache, data.operator).toString());
+        // data.result = Array.from(calc(data.result, data.cache, data.operator).toString());
+        data.result = calc(data.result, data.cache, data.operator);
     }
     data.cursor = 0;
     data.show = data.result;
