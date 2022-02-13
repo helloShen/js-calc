@@ -156,7 +156,11 @@ function allClear() {
 /* Reverse the number sign positive negative of user input or result. */
 function neg() {
     if (data.show !== data.accumulator) { // data.show points to one of the operand
-        data.operands[data.cursor].unshift('-');
+        if (data.operands[data.cursor][0] !== '-') {
+            data.operands[data.cursor].unshift('-');
+        } else {
+            data.operands[data.cursor].shift();
+        }
     } else {
         data.accumulator *= -1;
         data.show = data.accumulator;

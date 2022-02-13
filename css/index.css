@@ -1,27 +1,33 @@
 :root {
-    --dark-gray: rgb(128, 128, 128);
-    --gray: rgb(169, 169, 169);
-    --light-gray: rgb(211, 211, 211);
-    --very-light-gray: rgb(255, 255, 255);
-    --white: rgb(255, 255, 255);
-    --orange: rgb(255, 165, 0);
-    --dark-orange: rgb(211, 137, 0);
+    --dark-blue: #283345;
+    --gray: #a9adb4;
+    --gray-shadow: #a9adb444; 
+    --back-gray: #5e6b7e;
+    --white: #fbfbfb;
+    --orange: #fc9406;
+    --black: #00081c;
+    --black-shadow: #00081caa;
 }
 
 .calc {
     /* box */
-    width: 40vw;
-    height: 60vw;
+    width: 50vh;
+    height: 80vh;
+    background-color: var(--dark-blue);
+    border-radius: 1.6rem;
+    padding: 1rem;
     /* text */
     color: var(--white);
+    font-size: 4vh;
+    font-family: Roboto, Arial, sans-serif;
     /* layout */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 1px;
+    grid-gap: 1rem;
 }
 
 .screen {
-    background-color: var(--dark-gray);
+    font-size: 5vh;
     grid-column: 1 / 5;
     grid-row: 1 / 3;
     display: flex;
@@ -34,37 +40,48 @@
 }
 
 .btn {
+    border-radius: 1.4rem;
+    background-color: var(--dark-blue);
+    box-shadow: 0.2rem 0.2rem 0.6rem var(--black-shadow),
+                -0.2rem -0.2rem 0.6rem var(--gray-shadow);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.btn.pressed {
+    box-shadow: 0.1rem 0.1rem 0.4rem var(--black-shadow),
+                -0.1rem -0.1rem 0.4rem var(--gray-shadow);
+    font-weight: 900;
+}
+
 .clear,
 .negative,
 .percentage {
-    background-color: var(--light-gray);
+    color: var(--gray);
 }
 
 .clear.pressed,
 .negative.pressed,
 .percentage.pressed {
-    background-color: var(--very-light-gray);
+    color: var(--white);
 }
 
 .num {
-    background-color: var(--gray);
+    color: var(--white);
 }
 
 .num.pressed {
-    background-color: var(--light-gray);
+    color: var(--orange);
 }
 
 .op,
 .equal {
-    background-color: var(--orange);
+    font-size: 5vh;
+    color: var(--orange);
 }
 
 .op.pressed,
 .equal.pressed {
-    background-color: var(--dark-orange);
+    color: var(--white);
 }
