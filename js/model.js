@@ -130,7 +130,7 @@ function input(ch) {
  */
 function show() {
     return (typeof data.show === 'number')? 
-        Array.from(trim(data.show.toPrecision(16)))
+        Array.from(trim(data.show.toPrecision(15)))
         : data.show;
 }
 
@@ -172,7 +172,7 @@ function neg() {
 function toPercentage(numArr) {
     let numFloat = parseFloat(numArr.join(''));
     numFloat /= 100;
-    return Array.from(trim(numFloat.toPrecision(16)));
+    return Array.from(trim(numFloat.toPrecision(15)));
 }
 
 /* Divide current input or result by 100. */
