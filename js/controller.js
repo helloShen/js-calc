@@ -1,14 +1,14 @@
 import { view } from './view.js';
 import { model } from './model.js';
 
-/* some global listeners and handlers */
+/* Some global listeners and handlers. */
 function generalController() {
     view.all.forEach((btn) => {
         btn.style['user-select'] = 'none';
     });
 }
 
-/* change button color when pressed */
+/* Change button color when pressed. */
 function btnColorController() {
     view.all.forEach((btn) => {
         btn.color = btn.style['background-color'];
@@ -26,50 +26,74 @@ function btnColorController() {
     }, true);
 }
 
-/* bind listener and handler to number button */
+/* Bind listener and handler to number button. */
 function numberController() {
     view.nums.forEach((num) => {
         num.addEventListener('click', () => {
             model.input(num.dataset.value);
             show();
+            /* allow user to clear current input */
+            view.clear.dataset['state'] = 'C';
+            view.clear.innerHTML = 'C';
         }, false);
     });
 }
 
-/* bind event listener and handler to '+*-/' operator */
+/* Bind event listener and handler to '+*-/' operator. */
 function operatorController() {
     view.ops.forEach((op) => {
         op.addEventListener('click', () => {
             model.operator(op.dataset.value);
             show();
+            /* user don't need to clear operator input */
+            view.clear.dataset['state'] = 'AC';
+            view.clear.innerHTML = 'AC';
         }, false);
     });
 }
 
-/* bind listener and handler to '=' button */
+/* Bind listener and handler to '=' button. */
 function equalController() {
     view.equal.addEventListener('click', () => {
         model.equal();
         show();
+        /* User can clear the output result from the screen. But not the data in the model. */
+        view.clear.dataset['state'] = 'C';
+        view.clear.innerHTML = 'C';
     }, false);
 }
 
-/* print the data on the screen */
+/* Bind listener and handler to 'C' button */
+function clearController() {
+    view.clear.addEventListener('click', () => {
+        const state = view.clear.dataset['state'];
+        if (view.clear.dataset['state'] === 'C') {
+            model.c();
+            show();
+            view.clear.dataset['state'] = 'AC';
+            view.clear.innerHTML = 'AC';
+        } else { // state === AC
+            model.ac();
+            show();
+        }
+    });
+}
+
+/* Print the data on the screen. */
 function show() {
     view.screen.innerHTML = (model.show())? model.show().join('') : 'Not a number';
 }
 
-/* a collection of all tasks */
+/* A collection of all tasks. */
 function init() {
     generalController();
     btnColorController();
     numberController();
     operatorController();
     equalController();
+    clearController();
     show();
 }
 
-/* start everything */
+/* Start everything. */
 init();
-console.log(0.1 + 0.2);
-console.log(0.1 * 0.2);

@@ -5,7 +5,7 @@ export const view = {
     'ops': document.querySelectorAll('.op'),
     'screen': document.querySelector('.screen'),
     'dot': document.querySelector('.dot'),
-    'c': document.querySelector('.clear'),
+    'clear': document.querySelector('.clear'),
     'neg': document.querySelector('.negative'),
     'per': document.querySelector('.percentage'),
     'equal': document.querySelector('.equal'),
