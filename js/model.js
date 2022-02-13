@@ -134,6 +134,11 @@ function show() {
         : data.show;
 }
 
+/* 
+ * Clear user input or result on the screen 
+ *  => For user input: clear directly the data in the model.
+ *  => For result: only clear the screen, but keep the result in model.
+ */
 function clear() {
     if (data.show !== data.accumulator) { // data.show points to one of the operand
         data.operands[data.cursor] = ['0'];
@@ -143,8 +148,39 @@ function clear() {
     }
 }
 
+/* Reset the model to its initial setting. */
 function allClear() {
     data = new Data();
+}
+
+/* Reverse the number sign positive negative of user input or result. */
+function neg() {
+    if (data.show !== data.accumulator) { // data.show points to one of the operand
+        data.operands[data.cursor].unshift('-');
+    } else {
+        data.accumulator *= -1;
+        data.show = data.accumulator;
+        if (data.operands[0]) data.operands[0] *= -1;
+    }
+}
+
+/* Conver the array ['1'] to ['0', '.', '0', '1'] */
+function toPercentage(numArr) {
+    let numFloat = parseFloat(numArr.join(''));
+    numFloat /= 100;
+    return Array.from(trim(numFloat.toPrecision(16)));
+}
+
+/* Divide current input or result by 100. */
+function percentage() {
+    if (data.show !== data.accumulator) { // data.show points to one of the operand
+        data.operands[data.cursor] = toPercentage(data.operands[data.cursor]);
+        data.show = data.operands[data.cursor];
+    } else {
+        data.accumulator /= 100;
+        data.show = data.accumulator;
+        if (data.operands[0]) data.operands[0] /= 100;
+    }
 }
 
 /* 
@@ -215,5 +251,7 @@ export const model = {
     'operator': operator,
     'equal': equal,
     'c': clear,
-    'ac': allClear
+    'ac': allClear,
+    'neg': neg,
+    'percentage': percentage
 }

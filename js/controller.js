@@ -76,7 +76,23 @@ function clearController() {
             model.ac();
             show();
         }
-    });
+    }, false);
+}
+
+/* Bind listener and handler to '+/-' button */
+function negController() {
+    view.neg.addEventListener('click', () => {
+        model.neg();
+        show();
+    }, false);
+}
+
+/* Bind listener and handler to '%' button */
+function percentageController() {
+    view.per.addEventListener('click', () => {
+        model.percentage();
+        show();
+    }, false);
 }
 
 /* Print the data on the screen. */
@@ -92,6 +108,8 @@ function init() {
     operatorController();
     equalController();
     clearController();
+    negController();
+    percentageController();
     show();
 }
 
