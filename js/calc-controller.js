@@ -1,5 +1,5 @@
-import { view } from './view.js';
-import { model } from './model.js';
+import { view } from './calc-view.js';
+import { model } from './calc-model.js';
 
 /* Some global listeners and handlers. */
 function generalController() {
@@ -114,4 +114,6 @@ function init() {
 }
 
 /* Start everything. */
-init();
+export const calc = {
+    'init': init
+};

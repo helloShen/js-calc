@@ -4,35 +4,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Chicle & Roboto Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/index.css"/>
-    <script type="module" src="./js/controller.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Chicle&family=Roboto&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/main.css"/>
+    <!-- Javascript -->
+    <script type="module" src="./js/main.js" defer></script>
     <title>Javascript Calculator</title>
 </head>
 <body>
-    <div class="calc">
-        <div class="screen"><div class="text"></div></div>
-        <div data-state="AC" class="btn clear"><div>AC</div></div>
-        <div class="btn negative"><div>+/-</div></div>
-        <div class="btn percentage"><div>%</div></div>
-        <div data-value="/" class="btn op"><div>÷</div></div>
-        <div data-value="1" class="btn num"><div>1</div></div>
-        <div data-value="2" class="btn num"><div>2</div></div>
-        <div data-value="3" class="btn num"><div>3</div></div>
-        <div data-value="*" class="btn op"><div>×</div></div>
-        <div data-value="4" class="btn num"><div>4</div></div>
-        <div data-value="5" class="btn num"><div>5</div></div>
-        <div data-value="6" class="btn num"><div>6</div></div>
-        <div data-value="-" class="btn op"><div>-</div></div>
-        <div data-value="7" class="btn num"><div>7</div></div>
-        <div data-value="8" class="btn num"><div>8</div></div>
-        <div data-value="9" class="btn num"><div>9</div></div>
-        <div data-value="+" class="btn op"><div>+</div></div>
-        <div data-value="0" class="btn num"><div>0</div></div>
-        <div data-value="." class="btn num"><div>.</div></div>
-        <div class="btn equal"><div>=</div></div>
+
+    <section class="header">
+        <div class="logo">SHEN</div>
+    </section>
+
+    <div class="spacer top"><img src="./imgs/wave-top.svg" alt="wave-top.svg"></div>
+    <section class="main">
+        <div class="quote">
+            <div class="title">Mango Calculator</div>
+            <div class="sub">I'm <span class="name">SHEN</span>. Love coding & designing. Javascript makes math sexy again!</div>
+            <div class="buttons">
+                <a href="#">
+                    <div class="button">My other apps</div>
+                </a>
+                <a href="#">
+                    <div class="button">Hire me</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Calculator -->
+        <div class="calc">
+            <div class="screen"><div class="text"></div></div>
+            <div data-state="AC" class="btn clear"><div>AC</div></div>
+            <div class="btn negative"><div>+/-</div></div>
+            <div class="btn percentage"><div>%</div></div>
+            <div data-value="/" class="btn op"><div>÷</div></div>
+            <div data-value="1" class="btn num"><div>1</div></div>
+            <div data-value="2" class="btn num"><div>2</div></div>
+            <div data-value="3" class="btn num"><div>3</div></div>
+            <div data-value="*" class="btn op"><div>×</div></div>
+            <div data-value="4" class="btn num"><div>4</div></div>
+            <div data-value="5" class="btn num"><div>5</div></div>
+            <div data-value="6" class="btn num"><div>6</div></div>
+            <div data-value="-" class="btn op"><div>-</div></div>
+            <div data-value="7" class="btn num"><div>7</div></div>
+            <div data-value="8" class="btn num"><div>8</div></div>
+            <div data-value="9" class="btn num"><div>9</div></div>
+            <div data-value="+" class="btn op"><div>+</div></div>
+            <div data-value="0" class="btn num"><div>0</div></div>
+            <div data-value="." class="btn num"><div>.</div></div>
+            <div class="btn equal"><div>=</div></div>
+        </div>
+        <!-- End Calculator -->
+    </section>
+    
+    <div class="spacer bottom"><img src="./imgs/wave-bottom.svg" alt="wave-bottom.svg"></div>
+
+    <div class="footer">
+        <div class="text">
+            <div>Copyright ©</div>
+            <div class="email">hireme.shen@gmail.com</div>
+            <div class="split">|</div>
+            <div class="repo"> Source code - </div>
+            <div class="img"><a href="https://github.com/helloShen/js-calc"><img src="./imgs/github.png"></a></div>
+        </div>
     </div>
 </body>
 </html>

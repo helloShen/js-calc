@@ -4,27 +4,26 @@
     --gray-shadow: #a9adb444; 
     --back-gray: #5e6b7e;
     --white: #fbfbfb;
+    --milk-white: #FFEACE;
     --white-shadow: #fbfbfbaa;
     --orange: #fc9406;
+    --pomplamoose: #ff645c;
+    --pink: #D2558A;
     --black: #00081c;
     --black-shadow: #00081caa;
 }
 
-body {
-    height: 100vh;
-    background-color: var(--back-gray);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .calc {
     /* box */
-    width: 50vh;
-    height: 80vh;
+    width: 18rem;
+    min-width: 12rem;
+    aspect-ratio: 0.618 / 1;
     background-color: var(--dark-blue);
     border-radius: 1.6rem;
+    margin-right: 5vw;
+    margin-left: 5vw;
     padding: 1rem;
+    z-index: 2;
     box-shadow: 0.05rem 0.05rem 0.4rem var(--black-shadow),
                 -0.05rem -0.05rem 0.4rem var(--black-shadow); 
     /* text */

@@ -1,0 +1,148 @@
+@import url("./calc.css");
+
+/* Colors already included in clac.css */
+/* :root {
+    --dark-blue: #283345;
+    --gray: #a9adb4;
+    --gray-shadow: #a9adb444; 
+    --back-gray: #5e6b7e;
+    --white: #fbfbfb;
+    --milk-white: #FFEACE;
+    --white-shadow: #fbfbfbaa;
+    --orange: #fc9406;
+    --black: #00081c;
+    --black-shadow: #00081caa;
+} */
+
+body {
+    margin: 0;
+    width: 100vw;
+}
+
+section {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    height: 4vh;
+    background-color: var(--dark-blue);
+    padding-left: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    color: var(--white);
+    font-weight: 900;
+    margin-top: 1rem;
+}
+
+.main {
+    padding: 1rem 10vw;
+    background-color: var(--orange);
+    display: flex;
+    justify-content: space-between;
+}
+
+.quote {
+    max-width: 40vw;
+    color: var(--white);
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.title {
+    font-size: 5rem;
+    font-family: 'Chicle', cursive;
+    font-weight: 700;
+}
+
+.sub {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 100;
+    color: var(--milk-white);
+}
+
+.sub .name {
+    font-weight: bolder;
+}
+
+.buttons {
+    display: flex;
+}
+
+.buttons > a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+.button {
+    margin-right: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: lighter;
+    user-select: none;
+    border: 2px solid var(--white);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.button:hover {
+    border: 2px solid var(--pomplamoose);
+    color: var(--pomplamoose);
+}
+
+.spacer {
+    width: 100%;
+}
+
+.spacer > img {
+    width: 100%;
+    display: block;
+}
+
+.spacer.top > img {
+    aspect-ratio: 960/80;
+}
+
+.spacer.bottom > img {
+    aspect-ratio: 960/120;
+}
+
+.footer {
+    height: 8vh;
+    background-color: var(--dark-blue);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer .text {
+    display: flex;
+    align-items: center;
+}
+
+.footer div {
+    margin: 0 4px;
+}
+
+.footer .split {
+    margin: 0 16px;
+}
+
+.footer .email {
+    color: var(--white);
+    font-weight: bolder;
+}
+
+.footer img {
+    width: 24px;
+    height: 24px;
+}
+

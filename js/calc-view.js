@@ -1,5 +1,5 @@
 export const view = {
-    /* original css class */
+    /* calculator original css class */
     'all': document.querySelectorAll('.btn'),
     'nums': document.querySelectorAll('.num'),
     'ops': document.querySelectorAll('.op'),
@@ -10,7 +10,7 @@ export const view = {
     'per': document.querySelector('.percentage'),
     'equal': document.querySelector('.equal'),
 
-    /* local groups */
+    /* color groups */
     'gray': document.querySelectorAll('.num, .dot'),
     'orange': document.querySelectorAll('.op, .equal'),
     'lightGray': document.querySelectorAll('.clear, .negative, .percentage')
